@@ -1,0 +1,36 @@
+﻿@model TodosViewModel
+@{
+	ViewData["Title"] = "Todo";
+}
+<form method="post" asp-controller="Todo" asp-action="OnAdd">
+	<h1>Title</h1>
+	<input type="text" name="title" required />
+	<br />
+	<h1>Content</h1>
+	<input type="text" name="content" required />
+	<br />
+	<input type="submit" value="Create" />
+	
+</form>
+
+
+<h1>Todos:</h1>
+
+@foreach (var todo in Model._todos)
+{
+	<h1>@todo.Title</h1>
+	<h1>@todo.Content</h1>
+
+	<h1>@(todo.IsCompleted ? "Completed" : "In Progess")</h1>
+	@using (Html.BeginForm("OnDelete", "Todo", FormMethod.Post))
+	{
+		@Html.Hidden("title",todo.Title)
+		<input type="submit" value="Delete" />
+
+	}
+	@using (Html.BeginForm("Update", "Todo", FormMethod.Post))
+	{
+		@Html.Hidden("title",todo.Title)
+		<input type="submit" value="Update" />
+	}
+}

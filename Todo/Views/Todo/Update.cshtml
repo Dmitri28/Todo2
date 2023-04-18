@@ -1,0 +1,20 @@
+﻿@model TodoViewModel
+@{
+	ViewData["Title"] = "Todo";
+}
+
+@using (Html.BeginForm("OnUpdate", "Todo", FormMethod.Post))
+{
+	@Html.Hidden("id",Model.Todo.Id)
+	<h1>Title</h1>
+	<input type="text" name="title" value="@Model.Todo.Title" required />
+	<br />
+	<h1>Content</h1>
+	<input type="text" name="content" value="@Model.Todo.Content" required />
+	<br />
+	<input type="submit" value="Save" />
+}
+@using (Html.BeginForm("Index", "Todo", FormMethod.Post))
+{
+	<input type="submit" value="Cancel" />
+}
